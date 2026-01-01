@@ -69,6 +69,9 @@ tmdb/
 ├── requirements.txt                   # Python dependencies
 ├── pyproject.toml                    # Project configuration
 ├── uv.lock                           # Dependency lock file
+├── .env                              # Environment variables (not in git)
+├── .env.example                      # Environment variables template
+├── .gitignore                        # Git ignore rules
 ├── top_rated_movies_with_genres.csv  # Sample output data
 └── __pycache__/                      # Python cache directory
 ```
@@ -106,7 +109,22 @@ conda activate tmdb
 pip install -r requirements.txt
 ```
 
-### Step 4: NLTK Data Download
+### Step 4: Environment Configuration
+
+1. Copy the example environment file:
+```bash
+cp .env.example .env
+```
+
+2. Edit `.env` and add your TMDB API key:
+```bash
+# Open .env in your preferred editor
+nano .env  # or code .env, vim .env, etc.
+```
+
+3. Replace `your_api_key_here` with your actual TMDB API key
+
+### Step 5: NLTK Data Download
 
 The application will automatically download required NLTK data on first run:
 - punkt (tokenization)
@@ -120,13 +138,16 @@ The application will automatically download required NLTK data on first run:
 
 1. Register for a free account at [TMDB](https://www.themoviedb.org/)
 2. Navigate to API settings and generate an API key
-3. Update the API key in `data_acquisition.py`:
+3. Copy the example environment file:
+   ```bash
+   cp .env.example .env
+   ```
+4. Edit `.env` and replace `your_api_key_here` with your actual API key:
+   ```bash
+   TMDB_API_KEY=your_actual_api_key_here
+   ```
 
-```python
-API_KEY = "your_api_key_here"
-```
-
-> ⚠️ **Security Note**: For production use, store API keys in environment variables or configuration files, not in source code.
+> ✅ **Security Best Practice**: API keys are stored in `.env` file which is excluded from version control via `.gitignore`.
 
 ### Customizable Parameters
 
@@ -308,6 +329,7 @@ Spirited Away,young girl chihiro becom trap strang new world spirit...,Animation
 | `beautifulsoup4` | 4.13.5 | HTML parsing and removal |
 | `emoji` | 2.14.1 | Emoji handling and removal |
 | `autocorrect` | - | Automatic spell correction |
+| `python-dotenv` | 1.0.0 | Environment variable management |
 
 ### Supporting Dependencies
 

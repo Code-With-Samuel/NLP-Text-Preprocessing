@@ -1,10 +1,23 @@
 import requests
 import pandas as pd
 import time
+import os
+from dotenv import load_dotenv
 
-#API Keys:
-API_KEY = "8265bd1679663a7ea12ac168da84d2e8"
-BASE_URL = "https://api.themoviedb.org/3"
+# Load environment variables from .env file
+load_dotenv()
+
+# API Configuration from environment variables
+API_KEY = os.getenv("TMDB_API_KEY")
+BASE_URL = os.getenv("TMDB_BASE_URL", "https://api.themoviedb.org/3")
+
+# Validate API key
+if not API_KEY:
+    raise ValueError(
+        "TMDB_API_KEY not found in environment variables. "
+        "Please create a .env file with your TMDB API key. "
+        "See README.md for setup instructions."
+    )
 
 
 def fetch_top_rated_movies(pages=100):
